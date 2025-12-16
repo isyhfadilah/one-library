@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entri Baru | OneLib SATU University</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen bg-[#F8FAFC] flex text-[#1E293B]">
+        <aside class="w-72 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
+            <div class="p-8 flex items-center gap-3">
+                <div class="bg-indigo-600 p-2 rounded-xl">
+                    <i class="ph-fill ph-books text-white text-2xl"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900">OneLib</span>
+            </div>
+
+            <nav class="flex-1 px-6 space-y-1">
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-3 mb-4">Menu Utama</p>
+                <a href="index.html"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
+                    <i class="ph ph-squares-four text-xl group-hover:text-indigo-600"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="katalog.html"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
+                    <i class="ph ph-book-open text-xl group-hover:text-indigo-600"></i>
+                    <span>Katalog Buku</span>
+                </a>
+                <a href="transaksi.html"
+                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-600 rounded-xl font-semibold group transition-all">
+                    <i class="ph-bold ph-arrows-left-right text-xl"></i>
+                    <span>Transaksi</span>
+                </a>
+                <a href="anggota.html"
+                    class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
+                    <i class="ph ph-users text-xl group-hover:text-indigo-600"></i>
+                    <span>Anggota</span>
+                </a>
+            </nav>
+
+            <footer class="p-6 border-t border-slate-100">
+                <div class="flex items-center gap-3 p-2">
+                    <img src="https://ui-avatars.com/api/?name=Admin+Perpus&background=6366f1&color=fff"
+                        class="w-10 h-10 rounded-full shadow-sm">
+                    <div class="overflow-hidden">
+                        <span class="text-sm font-bold truncate block">Admin Perpus</span>
+                        <span class="text-xs text-slate-400 truncate block">admin@kampus.id</span>
+                    </div>
+                </div>
+            </footer>
+        </aside>
+
+        <main class="flex-1 overflow-y-auto">
+            <header
+                class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-10">
+                <div class="flex items-center gap-4">
+                    <a href="index.html"
+                        class="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 hover:text-indigo-600 transition shadow-sm">
+                        <i class="ph-bold ph-arrow-left"></i>
+                    </a>
+                    <div>
+                        <h2 class="text-lg font-bold">Entri Transaksi Baru</h2>
+                        <p class="text-xs text-slate-500">Pencatatan peminjaman buku oleh mahasiswa.</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs font-bold text-slate-400 uppercase block">ID Transaksi</span>
+                    <span class="text-sm font-mono font-bold text-indigo-600">TRX-20251216-0042</span>
+                </div>
+            </header>
+
+            <section class="p-8 max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-8">
+
+                            <div class="space-y-4">
+                                <h3 class="flex items-center gap-3 text-slate-800 font-bold">
+                                    <span
+                                        class="w-7 h-7 bg-indigo-600 text-white rounded-lg flex items-center justify-center text-xs">1</span>
+                                    Identitas Peminjam
+                                </h3>
+                                <div class="relative">
+                                    <i
+                                        class="ph ph-user-focus absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                                    <input type="text" placeholder="Masukkan NIM atau Nama Mahasiswa..."
+                                        class="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
+                                    <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                                        <kbd
+                                            class="px-2 py-1 bg-slate-100 border border-slate-200 rounded text-[10px] text-slate-400 font-bold">ALT
+                                            + A</kbd>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <h3 class="flex items-center gap-3 text-slate-800 font-bold">
+                                    <span
+                                        class="w-7 h-7 bg-indigo-600 text-white rounded-lg flex items-center justify-center text-xs">2</span>
+                                    Detail Buku
+                                </h3>
+                                <div class="relative">
+                                    <i
+                                        class="ph ph-barcode absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                                    <input type="text" placeholder="Scan Barcode atau ketik Kode/Judul Buku..."
+                                        class="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
+                                </div>
+                                <div
+                                    class="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4">
+                                    <img src="https://covers.openlibrary.org/b/id/10523338-S.jpg"
+                                        class="w-12 h-16 object-cover rounded shadow-sm">
+                                    <div>
+                                        <p class="text-sm font-bold text-slate-700">The Pragmatic Programmer</p>
+                                        <p class="text-xs text-slate-500">ISBN: 978-0135957059 • <span
+                                                class="text-emerald-600 font-medium">Tersedia</span></p>
+                                    </div>
+                                    <button class="ml-auto text-slate-400 hover:text-rose-500"><i
+                                            class="ph-bold ph-x"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-700">Tanggal Pinjam</label>
+                                    <input type="date" value="2025-12-16"
+                                        class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 outline-none bg-slate-50 text-slate-500 cursor-not-allowed"
+                                        readonly>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-700">Batas Pengembalian</label>
+                                    <input type="date" value="2025-12-23"
+                                        class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-3 pt-6 border-t border-slate-50">
+                                <button type="submit"
+                                    class="flex-1 py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
+                                    <i class="ph-bold ph-check-circle text-xl"></i>
+                                    Selesaikan Transaksi
+                                </button>
+                                <button type="button"
+                                    class="px-8 py-4 bg-slate-100 text-slate-600 rounded-2xl font-bold hover:bg-slate-200 transition">Batal</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-1 space-y-6">
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                            <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2">
+                                <i class="ph-fill ph-lightbulb-filament text-indigo-600"></i>
+                                Quick Tips
+                            </h4>
+                            <ul class="space-y-4">
+                                <li class="flex gap-3">
+                                    <div
+                                        class="w-5 h-5 bg-indigo-50 text-indigo-600 rounded flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="ph-bold ph-lightning text-[10px]"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-500 leading-relaxed">Gunakan <span
+                                            class="font-bold">Shortcut Keyboard</span> untuk navigasi antar field lebih
+                                        cepat.</p>
+                                </li>
+                                <li class="flex gap-3">
+                                    <div
+                                        class="w-5 h-5 bg-indigo-50 text-indigo-600 rounded flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="ph-bold ph-warning text-[10px]"></i>
+                                    </div>
+                                    <p class="text-xs text-slate-500 leading-relaxed">Sistem akan menolak transaksi jika
+                                        mahasiswa memiliki <span class="font-bold text-rose-500">tanggungan denda</span>
+                                        yang belum dibayar.</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-indigo-900 p-6 rounded-3xl text-white shadow-xl">
+                            <h4 class="font-bold mb-4 opacity-80 text-sm uppercase tracking-widest">Informasi Sistem
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="opacity-60">Durasi Pinjam</span>
+                                    <span class="font-bold">7 Hari</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="opacity-60">Denda / Hari</span>
+                                    <span class="font-bold text-amber-400">Rp 5.000</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="opacity-60">Max Buku</span>
+                                    <span class="font-bold">3 Judul</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
