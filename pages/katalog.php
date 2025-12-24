@@ -14,7 +14,14 @@ include '../config/functions.php';
     <div class="min-h-screen bg-[#F8FAFC] flex text-[#1E293B]">
         <?php include '../components/sidebar.php'; ?>
         <main class="flex-1 overflow-y-auto">
-            <?php include '../components/header.php'; ?>
+            <?php
+            $header_title = "Katalog Koleksi Buku";
+            $header_subtitle = "Total terdapat 2,540 judul buku yang terdaftar dalam sistem.";
+            $header_button_label = "Tambah Buku";
+            $header_button_link = "tambah-buku.php";
+
+            include '../components/header.php';
+            ?>
 
             <section class="p-8">
                 <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">

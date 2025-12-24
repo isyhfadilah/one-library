@@ -15,7 +15,13 @@ include '../config/functions.php';
         <?php include '../components/sidebar.php'; ?>
 
         <main class="flex-1 overflow-y-auto">
-            <?php include '../components/header.php'; ?>
+            <?php
+            $header_title = "Riwayat Transaksi";
+            $header_subtitle = "Pantau peminjaman, pengembalian, dan denda mahasiswa.";
+            $header_button_label = "Ekspor Laporan";
+            $header_button_link = "laporan.php";
+
+            include '../components/header.php'; ?>
 
             <section class="p-8">
                 <?php include '../components/filters-tab.php'; ?>

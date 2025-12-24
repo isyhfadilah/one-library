@@ -15,7 +15,14 @@ include '../config/functions.php';
         <?php include '../components/sidebar.php'; ?>
 
         <main class="flex-1 overflow-y-auto">
-            <?php include '../components/header.php'; ?>
+            <?php
+            $header_title = "Manajemen Anggota";
+            $header_subtitle = "Kelola data mahasiswa dan status keanggotaan perpus.";
+            $header_button_label = "Tambah Anggota";
+            $header_button_link = "tambah-anggota.php";
+
+            include '../components/header.php';
+            ?>
 
             <section class="p-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">

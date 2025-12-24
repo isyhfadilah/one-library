@@ -15,7 +15,14 @@ include '../config/functions.php';
     <?php include '../components/sidebar.php'; ?>
 
     <main class="flex-1 overflow-y-auto">
-      <?php include '../components/header.php'; ?>
+      <?php
+      $header_title = "Selamat Pagi, Admin";
+      $header_subtitle = "Berikut adalah ringkasan aktivitas perpustakaan hari ini.";
+      $header_button_label = "Transaksi Baru";
+      $header_button_link = "tambah-transaksi.php";
+
+      include '../components/header.php';
+      ?>
 
       <section class="p-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
