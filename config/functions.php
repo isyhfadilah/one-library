@@ -1,16 +1,23 @@
 <?php
-function renderStatCard($title, $value, $icon, $colorClass)
+function renderStatCard($label, $value, $icon, $color)
 {
-    echo '
-    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-5">
-        <div class="w-12 h-12 ' . $colorClass . ' rounded-xl flex items-center justify-center">
-            <i class="ph-fill ' . $icon . ' text-2xl"></i>
+    $colors = [
+        'indigo' => 'bg-indigo-50 text-indigo-600',
+        'emerald' => 'bg-emerald-50 text-emerald-600',
+        'rose' => 'bg-rose-50 text-rose-600'
+    ];
+    $selectedColor = $colors[$color] ?? $colors['indigo'];
+
+    echo "
+    <div class='flex-1 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4'>
+        <div class='w-10 h-10 $selectedColor rounded-lg flex items-center justify-center'>
+            <i class='ph-bold $icon text-xl'></i>
         </div>
         <div>
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block">' . $title . '</span>
-            <span class="text-2xl font-bold text-slate-800 block">' . $value . '</span>
+            <span class='text-[10px] font-bold text-slate-400 uppercase tracking-wider block'>$label</span>
+            <span class='text-lg font-bold text-slate-800'>$value</span>
         </div>
-    </div>';
+    </div>";
 }
 
 function renderBookCard($title, $author, $isbn, $status, $cover)
@@ -68,6 +75,37 @@ function renderTransactionRow($id, $name, $nim, $book, $date_pinjam, $date_kemba
         <td class='px-6 py-4'>
             <button class='p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-indigo-600 transition'>
                 <i class='ph-bold ph-dots-three-outline'></i>
+            </button>
+        </td>
+    </tr>";
+}
+
+function renderMemberRow($name, $nim, $prodi, $email, $status)
+{
+    $statusClass = (strtolower($status) == 'aktif')
+        ? 'bg-emerald-100 text-emerald-700'
+        : 'bg-rose-100 text-rose-700';
+
+    $avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($name) . "&background=random";
+
+    echo "
+    <tr class='hover:bg-slate-50/30 transition'>
+        <td class='px-6 py-4 flex items-center gap-3'>
+            <img src='$avatarUrl' class='w-9 h-9 rounded-full shadow-sm'>
+            <span class='font-semibold text-sm'>$name</span>
+        </td>
+        <td class='px-6 py-4 text-sm text-slate-600 font-medium'>$nim</td>
+        <td class='px-6 py-4 text-sm text-slate-500'>$prodi</td>
+        <td class='px-6 py-4 text-sm text-slate-500'>$email</td>
+        <td class='px-6 py-4'>
+            <span class='$statusClass text-[10px] font-bold px-3 py-1 rounded-full uppercase'>$status</span>
+        </td>
+        <td class='px-6 py-4 text-right'>
+            <button class='text-slate-400 hover:text-indigo-600 p-2 rounded-lg transition'>
+                <i class='ph-bold ph-pencil-simple text-lg'></i>
+            </button>
+            <button class='text-slate-400 hover:text-rose-600 p-2 rounded-lg transition ml-1'>
+                <i class='ph-bold ph-trash text-lg'></i>
             </button>
         </td>
     </tr>";

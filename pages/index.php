@@ -20,10 +20,10 @@ include '../config/functions.php';
       <section class="p-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           <?php
-          renderStatCard("Total Koleksi", "2,540", "ph-book", "bg-blue-50 text-blue-600");
-          renderStatCard("Dipinjam", "142", "ph-hand-pointing", "bg-amber-50 text-amber-600");
-          renderStatCard("Mhs Aktif", "890", "ph-user-plus", "bg-emerald-50 text-emerald-600");
-          renderStatCard("Terlambat", "12", "ph-warning-circle", "bg-rose-50 text-rose-600");
+          renderStatCard("Total Koleksi", "2,540", "ph-book", "blue");
+          renderStatCard("Dipinjam", "142", "ph-hand-pointing", "amber");
+          renderStatCard("Mhs Aktif", "890", "ph-user-plus", "emerald");
+          renderStatCard("Terlambat", "12", "ph-warning-circle", "rose");
           ?>
         </div>
 
