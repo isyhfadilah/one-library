@@ -13,24 +13,35 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
   <nav class="flex-1 px-6 space-y-1" aria-label="Main menu">
     <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-3 mb-4">Menu Utama</p>
+
     <a href="index.php"
-      class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-600 rounded-xl font-semibold group transition-all"
-      aria-current="page">
+      class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold group transition-all 
+      <?= ($current_page == 'index.php') ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' ?>"
+      <?= ($current_page == 'index.php') ? 'aria-current="page"' : '' ?>>
       <i class="ph-bold ph-squares-four text-xl" aria-hidden="true"></i>
       <span>Dashboard</span>
     </a>
-    <a href="katalog.html"
-      class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
+
+    <a href="katalog.php"
+      class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold group transition-all 
+      <?= ($current_page == 'katalog.php') ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' ?>"
+      <?= ($current_page == 'katalog.php') ? 'aria-current="page"' : '' ?>>
       <i class="ph ph-book-open text-xl group-hover:text-indigo-600" aria-hidden="true"></i>
       <span>Katalog Buku</span>
     </a>
-    <a href="transaksi.html"
-      class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
+
+    <a href="transaksi.php"
+      class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold group transition-all 
+      <?= ($current_page == 'transaksi.php') ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' ?>"
+      <?= ($current_page == 'transaksi.php') ? 'aria-current="page"' : '' ?>>
       <i class="ph ph-arrows-left-right text-xl group-hover:text-indigo-600" aria-hidden="true"></i>
       <span>Transaksi</span>
     </a>
-    <a href="anggota.html"
-      class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
+
+    <a href="anggota.php"
+      class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold group transition-all 
+      <?= ($current_page == 'anggota.php') ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' ?>"
+      <?= ($current_page == 'anggota.php') ? 'aria-current="page"' : '' ?>>
       <i class="ph ph-users text-xl group-hover:text-indigo-600" aria-hidden="true"></i>
       <span>Anggota</span>
     </a>
