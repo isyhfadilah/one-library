@@ -1,86 +1,30 @@
+<?php
+include '../config/db.php';
+include '../modules/buku.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Buku Baru | OneLib</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-    </style>
+    <?php include '../components/meta.php'; ?>
 </head>
 
 <body>
     <div class="min-h-screen bg-[#F8FAFC] flex text-[#1E293B]">
-        <aside class="w-72 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
-            <div class="p-8 flex items-center gap-3">
-                <div class="bg-indigo-600 p-2 rounded-xl">
-                    <i class="ph-fill ph-books text-white text-2xl"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-slate-900">OneLib</span>
-            </div>
-
-            <nav class="flex-1 px-6 space-y-1">
-                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-3 mb-4">Menu Utama</p>
-                <a href="index.html"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
-                    <i class="ph ph-squares-four text-xl group-hover:text-indigo-600"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="katalog.html"
-                    class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-600 rounded-xl font-semibold group transition-all">
-                    <i class="ph-bold ph-book-open text-xl"></i>
-                    <span>Katalog Buku</span>
-                </a>
-                <a href="transaksi.html"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
-                    <i class="ph ph-arrows-left-right text-xl group-hover:text-indigo-600"></i>
-                    <span>Transaksi</span>
-                </a>
-                <a href="anggota.html"
-                    class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-50 hover:text-slate-900 rounded-xl font-medium transition-all group">
-                    <i class="ph ph-users text-xl group-hover:text-indigo-600"></i>
-                    <span>Anggota</span>
-                </a>
-            </nav>
-
-            <footer class="p-6 border-t border-slate-100">
-                <div class="flex items-center gap-3 p-2">
-                    <img src="https://ui-avatars.com/api/?name=Admin+Perpus&background=6366f1&color=fff"
-                        class="w-10 h-10 rounded-full shadow-sm">
-                    <div class="overflow-hidden">
-                        <span class="text-sm font-bold truncate block">Admin Perpus</span>
-                        <span class="text-xs text-slate-400 truncate block">admin@kampus.id</span>
-                    </div>
-                </div>
-            </footer>
-        </aside>
+        <?php include '../components/sidebar.php'; ?>
 
         <main class="flex-1 overflow-y-auto">
-            <header
-                class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-10">
-                <div class="flex items-center gap-4">
-                    <a href="katalog.html"
-                        class="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 hover:text-indigo-600 transition shadow-sm">
-                        <i class="ph-bold ph-arrow-left"></i>
-                    </a>
-                    <div>
-                        <h2 class="text-lg font-bold">Tambah Koleksi Buku</h2>
-                        <p class="text-xs text-slate-500">Input data buku baru ke dalam katalog perpustakaan.</p>
-                    </div>
-                </div>
-            </header>
+            <?php
+            $header_title = "Tambah Koleksi Buku";
+            $header_subtitle = "Input data buku baru ke dalam katalog perpustakaan.";
+
+            include '../components/header.php';
+            ?>
 
             <section class="p-8 max-w-6xl mx-auto">
-                <form class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <form action="" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
                     <div class="lg:col-span-1 space-y-6">
                         <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
@@ -102,7 +46,7 @@
                                     <p class="text-xs text-slate-400 mt-1">Format JPG atau PNG (Maks. 2MB)</p>
                                 </div>
 
-                                <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*"
+                                <input type="file" name="cover_url" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*"
                                     onchange="previewCover(event)">
                             </div>
 
@@ -133,25 +77,26 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="md:col-span-2 space-y-2">
                                     <label class="text-sm font-bold text-slate-700">Judul Buku</label>
-                                    <input type="text" placeholder="Masukkan judul lengkap buku"
+                                    <input type="text" name="judul" placeholder="Masukkan judul lengkap buku"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
                                 </div>
 
                                 <div class="space-y-2">
                                     <label class="text-sm font-bold text-slate-700">Penulis / Pengarang</label>
-                                    <input type="text" placeholder="Nama penulis"
+                                    <input type="text" name="penulis" placeholder="Nama penulis"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
                                 </div>
 
                                 <div class="space-y-2">
                                     <label class="text-sm font-bold text-slate-700">ISBN-13</label>
-                                    <input type="text" placeholder="978-xxxxxxxxxx"
+                                    <input type="text" name="isbn" placeholder="978-xxxxxxxxxx"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all font-mono">
                                 </div>
 
                                 <div class="space-y-2">
                                     <label class="text-sm font-bold text-slate-700">Kategori / Genre</label>
                                     <select
+                                        name="kategori"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none bg-white">
                                         <option>Pilih Kategori</option>
                                         <option>Teknologi</option>
@@ -163,33 +108,33 @@
 
                                 <div class="space-y-2">
                                     <label class="text-sm font-bold text-slate-700">Tahun Terbit</label>
-                                    <input type="number" placeholder="2024"
+                                    <input name="tahun_terbit" type="number" placeholder="2024"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
                                 </div>
 
                                 <div class="space-y-2">
                                     <label class="text-sm font-bold text-slate-700">Penerbit</label>
-                                    <input type="text" placeholder="Nama penerbit"
+                                    <input type="text" name="penerbit" placeholder="Nama penerbit"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
                                 </div>
 
                                 <div class="space-y-2">
                                     <label class="text-sm font-bold text-slate-700">Jumlah Stok</label>
-                                    <input type="number" value="1"
+                                    <input type="number" name="stok" value="1"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
                                 </div>
                             </div>
 
                             <div class="mt-6 space-y-2">
                                 <label class="text-sm font-bold text-slate-700">Ringkasan / Sinopsis</label>
-                                <textarea rows="4" placeholder="Tuliskan deskripsi singkat mengenai isi buku..."
+                                <textarea name="sinopsis" rows="4" placeholder="Tuliskan deskripsi singkat mengenai isi buku..."
                                     class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all resize-none"></textarea>
                             </div>
 
                             <div class="flex justify-end gap-3 pt-8 border-t border-slate-50 mt-8">
                                 <button type="button"
                                     class="px-6 py-3.5 rounded-2xl font-bold text-slate-400 hover:bg-slate-50 transition">Batal</button>
-                                <button type="submit"
+                                <button type="submit" name="tambah_buku"
                                     class="px-10 py-3.5 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition transform active:scale-95 flex items-center gap-2">
                                     <i class="ph-bold ph-floppy-disk"></i> Simpan ke Katalog
                                 </button>
@@ -204,7 +149,7 @@
     <script>
         function previewCover(event) {
             const reader = new FileReader();
-            reader.onload = function () {
+            reader.onload = function() {
                 const output = document.getElementById('coverPreview');
                 const placeholder = document.getElementById('uploadPlaceholder');
                 output.src = reader.result;
