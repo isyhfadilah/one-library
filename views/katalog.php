@@ -23,7 +23,7 @@ $total_buku = mysqli_num_rows($result_buku);
             $header_title = "Katalog Koleksi Buku";
             $header_subtitle = "Total terdapat " . number_format($total_buku) . " judul buku yang terdaftar.";
             $header_button_label = "Tambah Buku";
-            $header_button_link = "tambah_buku.php";
+            $header_button_link = "tambah-buku.php";
 
             include '../components/header.php';
             ?>
