@@ -66,9 +66,15 @@ $total_buku = mysqli_num_rows($result_buku);
                                                 <div class="flex items-center gap-4">
                                                     <img src="../../assets/img/covers/<?= $row['cover_url'] ?>"
                                                         class="w-10 h-14 rounded-lg object-cover shadow-sm group-hover:scale-105 transition-transform">
-                                                    <div>
-                                                        <p class="font-bold text-slate-800 text-sm"><?= $row['judul'] ?></p>
-                                                        <p class="text-xs text-slate-500"><?= $row['penulis'] ?> • <span class="text-slate-400"><?= $row['isbn'] ?></span></p>
+                                                    <div class="flex flex-col">
+                                                        <a href="detail-buku.php?id=<?= $row['id_buku'] ?>"
+                                                            class="font-bold text-slate-800 text-sm hover:text-indigo-600 transition-all duration-200">
+                                                            <?= $row['judul'] ?>
+                                                        </a>
+
+                                                        <p class="text-xs text-slate-500 mt-0.5">
+                                                            <?= $row['penulis'] ?> • <span class="text-slate-400 font-medium"><?= $row['isbn'] ?></span>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </td>
