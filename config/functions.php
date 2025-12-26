@@ -20,7 +20,7 @@ function renderStatCard($label, $value, $icon, $color)
     </div>";
 }
 
-function renderBookCard($title, $author, $isbn, $status, $cover)
+function renderBookCard($id, $title, $author, $isbn, $status, $cover)
 {
     $isAvailable = (strtolower($status) == 'tersedia');
     $statusClass = $isAvailable ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700';
@@ -29,15 +29,22 @@ function renderBookCard($title, $author, $isbn, $status, $cover)
     $disabled    = $isAvailable ? '' : 'disabled';
 
     echo "
-    <div class='bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col'>
-        <img src='$cover' alt='$title' class='w-full h-48 object-cover rounded-xl mb-4'>
+    <div class='group relative bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col transition-all duration-300 hover:border-indigo-300 hover:shadow-md'>
+        
+        <div class='relative w-full h-48 overflow-hidden rounded-xl mb-4'>
+            <img src='$cover' alt='$title' class='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'>
+        </div>
+
         <div class='flex-1'>
-            <h3 class='font-bold text-lg text-slate-800 mb-1 leading-tight'>$title</h3>
+            <a href='detail-buku.php?id=$id' class='absolute inset-0 z-10' aria-label='Lihat detail $title'></a>
+            
+            <h3 class='font-bold text-lg text-slate-800 mb-1 leading-tight transition-colors duration-300 group-hover:text-indigo-600'>$title</h3>
             <p class='text-sm text-slate-500 mb-2'>$author</p>
             <span class='inline-block $statusClass text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2'>$status</span>
             <p class='text-xs text-slate-400 font-mono italic'>ISBN: $isbn</p>
         </div>
-        <button $disabled class='mt-4 $buttonClass px-4 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95'>
+
+        <button $disabled class='relative z-20 mt-4 $buttonClass px-4 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95'>
             $buttonText
         </button>
     </div>";

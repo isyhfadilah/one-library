@@ -56,6 +56,7 @@ $total_buku = mysqli_num_rows($result_buku);
                             $cover_img = (!empty($row['cover_url']) && file_exists($cover_path)) ? $cover_path : "https://via.placeholder.com/300x400?text=No+Cover";
 
                             renderBookCard(
+                                $row['id_buku'],
                                 $row['judul'],
                                 $row['penulis'],
                                 $row['isbn'],
