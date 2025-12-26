@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . '/../config/db.php';
+$redirect_base = "/one-library/views/buku/";
 
 if (isset($_POST['tambah_buku'])) {
     $judul        = mysqli_real_escape_string($conn, $_POST['judul']);
@@ -13,7 +14,7 @@ if (isset($_POST['tambah_buku'])) {
 
     $cover_url = "default_cover.jpg";
     if (isset($_FILES['cover_url']) && $_FILES['cover_url']['error'] == 0) {
-        $target_dir = "../assets/img/covers/";
+        $target_dir = "../../assets/img/covers/";
 
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
@@ -32,10 +33,10 @@ if (isset($_POST['tambah_buku'])) {
             VALUES ('$judul', '$penulis', '$isbn', '$kategori', '$tahun_terbit', '$penerbit', '$stok', '$sinopsis', '$cover_url')";
 
     if (mysqli_query($conn, $sql)) {
-        header("Location: ../views/katalog.php?status=tambah_berhasil");
+        header("Location: " . $redirect_base . "katalog.php?status=tambah_berhasil");
         exit();
     } else {
-        header("Location: buku.php?status=error");
+        header("Location:" . $redirect_base . "katalog.php?status=error");
     }
 }
 
@@ -58,7 +59,7 @@ if (isset($_POST['edit_buku'])) {
 
     // Handle upload cover baru
     if (isset($_FILES['cover_url']) && $_FILES['cover_url']['error'] == 0) {
-        $target_dir = "../assets/img/covers/";
+        $target_dir = "../../assets/img/covers/";
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
         }
