@@ -75,6 +75,7 @@ if (isset($_GET['hapus_id'])) {
         exit();
     }
 }
+
 $keyword = isset($_GET['search']) ? mysqli_real_escape_string($conn, $_GET['search']) : '';
 $query_buku = "SELECT * FROM buku WHERE 
                judul LIKE '%$keyword%' OR 
