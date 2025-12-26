@@ -106,7 +106,7 @@ if (isset($_GET['hapus_id'])) {
     $sql = "DELETE FROM buku WHERE id_buku=$id";
 
     if (mysqli_query($conn, $sql)) {
-        header("Location: buku.php?status=hapus_berhasil");
+        header("Location:" . $redirect_base . "kelola-buku.php?status=hapus_berhasil");
         exit();
     }
 }

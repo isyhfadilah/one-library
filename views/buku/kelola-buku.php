@@ -22,7 +22,6 @@ $total_buku = mysqli_num_rows($result_buku);
             <?php
             $header_title = "Manajemen Data Buku";
             $header_subtitle = "Total terdapat " . number_format($total_buku) . " judul buku dalam database.";
-            // Tombol di header kita biarkan tetap untuk Tambah Buku
             $header_button_label = "Tambah Buku Baru";
             $header_button_link = "tambah-buku.php";
             include '../../components/header.php';
@@ -89,11 +88,11 @@ $total_buku = mysqli_num_rows($result_buku);
                                                         class="p-2.5 text-amber-500 hover:bg-amber-50 rounded-xl transition-all" title="Edit Data">
                                                         <i class="ph-bold ph-pencil-simple text-lg"></i>
                                                     </a>
-                                                    <a href="../../modules/buku.php?hapus_id=<?= $row['id_buku'] ?>"
-                                                        onclick="return confirm('Yakin ingin menghapus buku ini? Semua data terkait akan hilang.')"
+                                                    <button type="button" onclick="confirmDelete(<?= $row['id_buku'] ?>, '<?= $row['judul'] ?>')" href="../../modules/buku.php?hapus_id=<?= $row['id_buku'] ?>"
+
                                                         class="p-2.5 text-rose-500 hover:bg-rose-50 rounded-xl transition-all" title="Hapus Data">
                                                         <i class="ph-bold ph-trash text-lg"></i>
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>

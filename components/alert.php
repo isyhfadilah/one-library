@@ -1,52 +1,80 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<?php if (isset($_GET['status'])): ?>
-    <script>
+<script>
+    // 1. Definisikan Konfigurasi Dasar agar senada dengan UI OneLib
+    const oneLibPopup = {
+        background: '#ffffff',
+        color: '#1E293B',
+        borderRadius: '24px', // Radius besar sesuai UI modern kamu
+        confirmButtonColor: '#4F46E5', // Indigo-600
+        cancelButtonColor: '#94A3B8', // Slate-400
+        customClass: {
+            popup: 'rounded-[24px] border border-slate-100 shadow-xl',
+            confirmButton: 'px-6 py-2.5 rounded-xl font-bold text-sm',
+            cancelButton: 'px-6 py-2.5 rounded-xl font-bold text-sm'
+        }
+    };
+
+    // 2. Fungsi Konfirmasi Hapus yang Senada
+    function confirmDelete(id, judul) {
+        Swal.fire({
+            ...oneLibPopup, // Ambil base style
+            title: 'Apakah anda yakin?',
+            text: `Buku "${judul}" akan dihapus permanen.`,
+            icon: 'warning',
+            iconColor: '#F43F5E', // Rose-500
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../../modules/buku.php?hapus_id=" + id;
+            }
+        });
+    }
+
+    // 3. Logika Notifikasi (Status dari URL)
+    <?php if (isset($_GET['status'])): ?>
         const status = "<?= $_GET['status'] ?>";
 
+        // Setup Toast Mixin
         const Toast = Swal.mixin({
-            background: '#ffffff',
-            color: '#1E293B',
-            borderRadius: '24px',
-            confirmButtonColor: '#4F46E5',
+            ...oneLibPopup, // Gunakan radius dan warna yang sama
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
         });
 
-        // Logika pesan berdasarkan status yang dikirim Logic
-        if (status === 'tambah_berhasil') {
-            Toast.fire({
+        // Mapping Pesan
+        const alerts = {
+            'tambah_berhasil': {
                 icon: 'success',
                 title: 'Berhasil!',
-                text: 'Buku baru telah ditambahkan ke katalog.',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true
-            });
-        } else if (status === 'success' || status === 'edit_berhasil') {
-            // --- INI UNTUK UPDATE/EDIT ---
-            Toast.fire({
+                text: 'Buku ditambahkan ke katalog.'
+            },
+            'edit_berhasil': {
                 icon: 'success',
                 title: 'Update Berhasil!',
-                text: 'Informasi buku telah diperbarui.',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true
-            });
-        } else if (status === 'hapus_berhasil') {
-            Toast.fire({
+                text: 'Informasi buku telah diperbarui.'
+            },
+            'hapus_berhasil': {
                 icon: 'success',
                 title: 'Terhapus!',
-                text: 'Buku telah dihapus dari sistem.',
-                timer: 2000
-            });
-        } else if (status === 'error') {
-            Toast.fire({
+                text: 'Buku telah dihapus dari sistem.'
+            },
+            'error': {
                 icon: 'error',
                 title: 'Gagal!',
-                text: 'Terjadi kesalahan sistem, silakan coba lagi.',
-            });
+                text: 'Terjadi kesalahan sistem.'
+            }
+        };
+
+        if (alerts[status]) {
+            Toast.fire(alerts[status]);
         }
 
-        // Bersihkan URL agar notif tidak muncul lagi saat refresh
         window.history.replaceState({}, document.title, window.location.pathname);
-    </script>
-<?php endif; ?>
+    <?php endif; ?>
+</script>
