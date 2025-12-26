@@ -1,7 +1,7 @@
 <?php
-include '../config/db.php';
-include '../modules/buku.php';
-include '../config/functions.php';
+include '../../config/db.php';
+include '../../modules/buku.php';
+include '../../config/functions.php';
 
 $total_buku = mysqli_num_rows($result_buku);
 ?>
@@ -11,12 +11,12 @@ $total_buku = mysqli_num_rows($result_buku);
 
 <head>
     <title>Katalog Buku | OneLib</title>
-    <?php include '../components/meta.php'; ?>
+    <?php include '../../components/meta.php'; ?>
 </head>
 
 <body>
     <div class="min-h-screen bg-[#F8FAFC] flex text-[#1E293B]">
-        <?php include '../components/sidebar.php'; ?>
+        <?php include '../../components/sidebar.php'; ?>
         <main class="flex-1 overflow-y-auto">
             <?php
             $header_title = "Katalog Koleksi Buku";
@@ -24,12 +24,12 @@ $total_buku = mysqli_num_rows($result_buku);
             $header_button_label = "Tambah Buku";
             $header_button_link = "tambah-buku.php";
 
-            include '../components/header.php';
+            include '../../components/header.php';
             ?>
 
             <section class="p-8">
                 <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <?php include '../components/search-bar.php'; ?>
+                    <?php include '../../components/search-bar.php'; ?>
 
                     <div class="flex items-center bg-slate-100 p-1.5 rounded-2xl gap-1">
                         <a href="katalog.php"
@@ -52,7 +52,7 @@ $total_buku = mysqli_num_rows($result_buku);
                             <?php
                             $status = ($row['stok'] > 0) ? "Tersedia" : "Kosong";
 
-                            $cover_path = "../assets/img/covers/" . $row['cover_url'];
+                            $cover_path = "../../assets/img/covers/" . $row['cover_url'];
                             $cover_img = (!empty($row['cover_url']) && file_exists($cover_path)) ? $cover_path : "https://via.placeholder.com/300x400?text=No+Cover";
 
                             renderBookCard(
@@ -75,7 +75,7 @@ $total_buku = mysqli_num_rows($result_buku);
         </main>
     </div>
 
-    <?php include '../components/alert.php'; ?>
+    <?php include '../../components/alert.php'; ?>
 </body>
 
 </html>

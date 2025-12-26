@@ -1,5 +1,5 @@
 <?php
-include '../config/functions.php';
+include '../../config/functions.php';
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +7,12 @@ include '../config/functions.php';
 
 <head>
     <title>Transaksi | OneLib SATU University</title>
-    <?php include '../components/meta.php'; ?>
+    <?php include '../../components/meta.php'; ?>
 </head>
 
 <body>
     <div class="min-h-screen bg-[#F8FAFC] flex text-[#1E293B]">
-        <?php include '../components/sidebar.php'; ?>
+        <?php include '../../components/sidebar.php'; ?>
 
         <main class="flex-1 overflow-y-auto">
             <?php
@@ -21,10 +21,10 @@ include '../config/functions.php';
             $header_button_label = "Ekspor Laporan";
             $header_button_link = "laporan.php";
 
-            include '../components/header.php'; ?>
+            include '../../components/header.php'; ?>
 
             <section class="p-8">
-                <?php include '../components/filters-tab.php'; ?>
+                <?php include '../../components/filters-tab.php'; ?>
 
                 <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <div class="overflow-x-auto">
@@ -56,7 +56,7 @@ include '../config/functions.php';
                         </table>
                     </div>
 
-                    <?php include '../components/pagination.php'; ?>
+                    <?php include '../../components/pagination.php'; ?>
                 </div>
 
             </section>

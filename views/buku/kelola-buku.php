@@ -1,7 +1,7 @@
 <?php
-include '../config/db.php';
-include '../modules/buku.php';
-include '../config/functions.php';
+include '../../config/db.php';
+include '../../modules/buku.php';
+include '../../config/functions.php';
 
 $total_buku = mysqli_num_rows($result_buku);
 ?>
@@ -11,12 +11,12 @@ $total_buku = mysqli_num_rows($result_buku);
 
 <head>
     <title>Kelola Data Buku | OneLib</title>
-    <?php include '../components/meta.php'; ?>
+    <?php include '../../components/meta.php'; ?>
 </head>
 
 <body class="bg-[#F8FAFC]">
     <div class="min-h-screen flex text-[#1E293B]">
-        <?php include '../components/sidebar.php'; ?>
+        <?php include '../../components/sidebar.php'; ?>
 
         <main class="flex-1 overflow-y-auto">
             <?php
@@ -25,13 +25,13 @@ $total_buku = mysqli_num_rows($result_buku);
             // Tombol di header kita biarkan tetap untuk Tambah Buku
             $header_button_label = "Tambah Buku Baru";
             $header_button_link = "tambah-buku.php";
-            include '../components/header.php';
+            include '../../components/header.php';
             ?>
 
             <section class="p-8">
                 <div class="mb-8 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
 
-                    <?php include '../components/search-bar.php'; ?>
+                    <?php include '../../components/search-bar.php'; ?>
 
                     <div class="flex items-center bg-slate-100 p-1.5 rounded-2xl gap-1 self-start lg:self-center">
                         <a href="katalog.php"
@@ -65,7 +65,7 @@ $total_buku = mysqli_num_rows($result_buku);
                                         <tr class="hover:bg-slate-50/50 transition-colors group">
                                             <td class="p-5">
                                                 <div class="flex items-center gap-4">
-                                                    <img src="../assets/img/covers/<?= $row['cover_url'] ?>"
+                                                    <img src="../../assets/img/covers/<?= $row['cover_url'] ?>"
                                                         class="w-10 h-14 rounded-lg object-cover shadow-sm group-hover:scale-105 transition-transform">
                                                     <div>
                                                         <p class="font-bold text-slate-800 text-sm"><?= $row['judul'] ?></p>
@@ -89,7 +89,7 @@ $total_buku = mysqli_num_rows($result_buku);
                                                         class="p-2.5 text-amber-500 hover:bg-amber-50 rounded-xl transition-all" title="Edit Data">
                                                         <i class="ph-bold ph-pencil-simple text-lg"></i>
                                                     </a>
-                                                    <a href="../modules/buku.php?hapus_id=<?= $row['id_buku'] ?>"
+                                                    <a href="../../modules/buku.php?hapus_id=<?= $row['id_buku'] ?>"
                                                         onclick="return confirm('Yakin ingin menghapus buku ini? Semua data terkait akan hilang.')"
                                                         class="p-2.5 text-rose-500 hover:bg-rose-50 rounded-xl transition-all" title="Hapus Data">
                                                         <i class="ph-bold ph-trash text-lg"></i>
@@ -117,7 +117,7 @@ $total_buku = mysqli_num_rows($result_buku);
         </main>
     </div>
 
-    <?php include '../components/alert.php'; ?>
+    <?php include '../../components/alert.php'; ?>
 </body>
 
 </html>
