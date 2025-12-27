@@ -1,5 +1,7 @@
 <?php
 include '../../config/functions.php';
+include '../../modules/auth.php';
+cekLogin();
 ?>
 
 <!DOCTYPE html>

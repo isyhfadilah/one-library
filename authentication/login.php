@@ -1,3 +1,25 @@
+<?php
+include '../modules/auth.php';
+
+if (isset($_SESSION['login'])) {
+    header("Location: ../views/dashboard/index.php");
+    exit();
+}
+
+$error = false;
+if (isset($_POST['masuk_dashboard'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (login($email, $password)) {
+        header("Location: ../views/dashboard/index.php");
+        exit();
+    } else {
+        $error = true;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,8 +29,7 @@
     <title>Masuk ke Akun | OneLib</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
@@ -20,24 +41,17 @@
 
 <body>
     <div class="min-h-screen w-full flex">
-
         <div class="hidden lg:flex w-1/2 bg-indigo-900 relative items-center justify-center overflow-hidden">
-
-
             <div class="relative z-10 p-12 text-center max-w-lg">
-                <div
-                    class="w-16 h-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
+                <div class="w-16 h-16 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-2xl">
                     <i class="ph-fill ph-books text-white text-3xl"></i>
                 </div>
                 <h1 class="text-4xl font-bold text-white mb-4 tracking-tight">OneLib System</h1>
                 <p class="text-indigo-200 text-lg leading-relaxed">
-                    Sistem manajemen perpustakaan terintegrasi untuk SATU University. Kelola koleksi, sirkulasi, dan
-                    keanggotaan dalam satu platform.
+                    Sistem manajemen perpustakaan terintegrasi untuk SATU University. Kelola koleksi, sirkulasi, dan keanggotaan dalam satu platform.
                 </p>
-
                 <div class="mt-12 p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 text-left">
-                    <p class="text-white text-sm italic mb-3">"A library is not a luxury but one of the necessities of
-                        life."</p>
+                    <p class="text-white text-sm italic mb-3">"A library is not a luxury but one of the necessities of life."</p>
                     <p class="text-xs font-bold text-indigo-300 uppercase tracking-wider">— Henry Ward Beecher</p>
                 </div>
             </div>
@@ -45,7 +59,6 @@
 
         <div class="w-full lg:w-1/2 bg-white flex items-center justify-center p-8">
             <div class="w-full max-w-md space-y-8">
-
                 <div class="flex lg:hidden items-center gap-2 mb-6">
                     <div class="bg-indigo-600 p-1.5 rounded-lg">
                         <i class="ph-fill ph-books text-white text-xl"></i>
@@ -58,31 +71,34 @@
                     <p class="text-slate-500 mt-2">Silakan masuk menggunakan akun staf perpustakaan.</p>
                 </div>
 
-                <form action="index.html" class="space-y-6">
+                <form action="" method="POST" class="space-y-6">
+
+                    <?php if ($error): ?>
+                        <div class="bg-rose-50 border border-rose-100 text-rose-600 p-4 rounded-xl text-sm flex items-center gap-3">
+                            <i class="ph-bold ph-warning-circle text-lg"></i>
+                            ID Staf atau kata sandi tidak sesuai.
+                        </div>
+                    <?php endif; ?>
+
                     <div class="space-y-2">
                         <label for="email" class="text-sm font-bold text-slate-700 block">ID Staf / Email</label>
                         <div class="relative">
-                            <input type="email" id="email" placeholder="admin@kampus.id"
+                            <input type="email" name="email" id="email" required placeholder="admin@kampus.id"
                                 class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-600 outline-none transition-all placeholder:text-slate-400">
-                            <i
-                                class="ph ph-envelope-simple absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                            <i class="ph ph-envelope-simple absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
                         </div>
                     </div>
 
                     <div class="space-y-2">
                         <div class="flex items-center justify-between">
                             <label for="password" class="text-sm font-bold text-slate-700 block">Kata Sandi</label>
-                            <a href="#"
-                                class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline">Lupa
-                                sandi?</a>
+                            <a href="#" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 hover:underline">Lupa sandi?</a>
                         </div>
                         <div class="relative">
-                            <input type="password" id="password" placeholder="••••••••"
+                            <input type="password" name="password" id="password" required placeholder="••••••••"
                                 class="w-full pl-11 pr-12 py-3.5 rounded-xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-600 outline-none transition-all placeholder:text-slate-400">
-                            <i
-                                class="ph ph-lock-key absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
-                            <button type="button"
-                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
+                            <i class="ph ph-lock-key absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i>
+                            <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition">
                                 <i class="ph ph-eye text-xl"></i>
                             </button>
                         </div>
@@ -91,12 +107,10 @@
                     <div class="flex items-center">
                         <input id="remember-me" name="remember-me" type="checkbox"
                             class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-600 cursor-pointer">
-                        <label for="remember-me"
-                            class="ml-2 block text-sm text-slate-600 cursor-pointer select-none">Ingat saya di perangkat
-                            ini</label>
+                        <label for="remember-me" class="ml-2 block text-sm text-slate-600 cursor-pointer select-none">Ingat saya di perangkat ini</label>
                     </div>
 
-                    <button type="submit"
+                    <button type="submit" name="masuk_dashboard"
                         class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3.5 rounded-xl font-bold shadow-lg shadow-indigo-100 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
                         Masuk ke Dashboard
                         <i class="ph-bold ph-arrow-right"></i>
@@ -104,9 +118,7 @@
                 </form>
 
                 <p class="text-center text-sm text-slate-400 mt-8">
-                    Butuh bantuan akses? <a href="../pages/hubungi.html"
-                        class="text-indigo-600 font-bold hover:underline">Hubungi IT
-                        Support</a>
+                    Butuh bantuan akses? <a href="../pages/hubungi.html" class="text-indigo-600 font-bold hover:underline">Hubungi IT Support</a>
                 </p>
             </div>
 
@@ -115,6 +127,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const toggleButton = passwordInput.nextElementSibling.nextElementSibling;
+        const eyeIcon = toggleButton.querySelector('i');
+
+        toggleButton.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            if (type === 'text') {
+                eyeIcon.classList.replace('ph-eye', 'ph-eye-slash');
+            } else {
+                eyeIcon.classList.replace('ph-eye-slash', 'ph-eye');
+            }
+        });
+    </script>
 </body>
 
 </html>

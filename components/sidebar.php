@@ -3,6 +3,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 $current_dir = basename(dirname($_SERVER['PHP_SELF']));
 
 $base_url = "/one-library/views";
+$auth_url = "/one-library/authentication";
 ?>
 
 <aside class="w-72 bg-white border-r border-slate-200 flex flex-col sticky top-0 h-screen">
@@ -46,13 +47,22 @@ $base_url = "/one-library/views";
   </nav>
 
   <footer class="p-6 border-t border-slate-100">
-    <div class="flex items-center gap-3 p-2">
-      <img src="https://ui-avatars.com/api/?name=Admin+Perpus&background=6366f1&color=fff"
-        class="w-10 h-10 rounded-full shadow-sm" alt="Profile">
-      <div class="overflow-hidden">
-        <p class="text-sm font-bold truncate text-slate-900">Admin Perpus</p>
-        <p class="text-xs text-slate-400 truncate block">admin@kampus.id</p>
+    <div class="flex items-center justify-between gap-3 p-2 rounded-2xl hover:bg-slate-50 transition-colors group">
+      <div class="flex items-center gap-3 overflow-hidden">
+        <img src="https://ui-avatars.com/api/?name=<?= urlencode($_SESSION['admin_nama'] ?? 'Admin') ?>&background=6366f1&color=fff"
+          class="w-10 h-10 rounded-full shadow-sm flex-shrink-0" alt="Profile">
+        <div class="overflow-hidden">
+          <p class="text-sm font-bold truncate text-slate-900">Administrator</p>
+          <p class="text-[11px] text-slate-400 truncate">Staf Perpus</p>
+        </div>
       </div>
+
+      <a href="<?= $auth_url; ?>/logout.php"
+        onclick="return confirm('Keluar dari sistem?')"
+        title="Keluar Sistem"
+        class="p-2.5 rounded-xl bg-slate-100 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-all shadow-sm">
+        <i class="ph-bold ph-sign-out text-lg"></i>
+      </a>
     </div>
   </footer>
 </aside>
