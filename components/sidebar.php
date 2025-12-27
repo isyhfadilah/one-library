@@ -57,12 +57,13 @@ $auth_url = "/one-library/authentication";
         </div>
       </div>
 
-      <a href="<?= $auth_url; ?>/logout.php"
-        onclick="return confirm('Keluar dari sistem?')"
+      <a href="javascript:void(0)"
+        onclick="confirmLogout('<?= $auth_url; ?>/logout.php')"
         title="Keluar Sistem"
         class="p-2.5 rounded-xl bg-slate-100 text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-all shadow-sm">
         <i class="ph-bold ph-sign-out text-lg"></i>
       </a>
+
     </div>
   </footer>
 </aside>

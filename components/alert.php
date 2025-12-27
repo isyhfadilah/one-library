@@ -1,13 +1,12 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    // 1. Definisikan Konfigurasi Dasar agar senada dengan UI OneLib
     const oneLibPopup = {
         background: '#ffffff',
         color: '#1E293B',
-        borderRadius: '24px', // Radius besar sesuai UI modern kamu
-        confirmButtonColor: '#4F46E5', // Indigo-600
-        cancelButtonColor: '#94A3B8', // Slate-400
+        borderRadius: '24px',
+        confirmButtonColor: '#4F46E5',
+        cancelButtonColor: '#94A3B8',
         customClass: {
             popup: 'rounded-[24px] border border-slate-100 shadow-xl',
             confirmButton: 'px-6 py-2.5 rounded-xl font-bold text-sm',
@@ -15,14 +14,13 @@
         }
     };
 
-    // 2. Fungsi Konfirmasi Hapus yang Senada
     function confirmDelete(id, judul) {
         Swal.fire({
-            ...oneLibPopup, // Ambil base style
+            ...oneLibPopup,
             title: 'Apakah anda yakin?',
             text: `Buku "${judul}" akan dihapus permanen.`,
             icon: 'warning',
-            iconColor: '#F43F5E', // Rose-500
+            iconColor: '#F43F5E',
             showCancelButton: true,
             confirmButtonText: 'Ya, Hapus!',
             cancelButtonText: 'Batal',
@@ -33,13 +31,29 @@
         });
     }
 
-    // 3. Logika Notifikasi (Status dari URL)
+    function confirmLogout(url) {
+        Swal.fire({
+            ...oneLibPopup,
+            title: 'Keluar Sistem?',
+            text: 'Anda perlu login kembali untuk mengakses dashboard.',
+            icon: 'question',
+            iconColor: '#4F46E5',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Keluar!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
+
     <?php if (isset($_GET['status'])): ?>
         const status = "<?= $_GET['status'] ?>";
 
-        // Setup Toast Mixin
         const Toast = Swal.mixin({
-            ...oneLibPopup, // Gunakan radius dan warna yang sama
+            ...oneLibPopup,
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
@@ -47,7 +61,6 @@
             timerProgressBar: true,
         });
 
-        // Mapping Pesan
         const alerts = {
             'tambah_berhasil': {
                 icon: 'success',

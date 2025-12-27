@@ -75,6 +75,9 @@ include '../../config/functions.php';
             </section>
         </main>
     </div>
+
+    <?php include '../../components/alert.php'; ?>
+
 </body>
 
 </html>
