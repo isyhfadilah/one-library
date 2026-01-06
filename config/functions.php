@@ -62,6 +62,24 @@ function renderTransactionRow($id, $name, $nim, $book, $date_pinjam, $date_kemba
     $colors = $statusMap[$status] ?? ['bg' => 'bg-slate-100', 'text' => 'text-slate-700'];
     $initials = strtoupper(substr($name, 0, 1) . substr(explode(' ', $name)[1] ?? '', 0, 1));
 
+    $rawId = str_replace(['#TRX-', ' '], '', $id); 
+
+    $actionButton = "";
+    if (strtolower($status) === 'dipinjam') {
+        $actionButton = "
+        <button onclick=\"confirmReturn('$rawId', '$name')\" 
+            class='group flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 rounded-lg transition-all text-[11px] font-bold uppercase tracking-wider border border-indigo-100'>
+            <i class='ph-bold ph-arrow-u-up-left'></i>
+            <span>Kembalikan</span>
+        </button>";
+    } else {
+        $actionButton = "
+        <span class='flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-400 rounded-lg text-[11px] font-bold uppercase tracking-wider border border-slate-100'>
+            <i class='ph-bold ph-check'></i>
+            <span>Selesai</span>
+        </span>";
+    }
+
     echo "
     <tr class='hover:bg-slate-50/50 transition'>
         <td class='px-6 py-4 text-sm font-mono text-indigo-600 font-medium'>$id</td>
@@ -80,10 +98,8 @@ function renderTransactionRow($id, $name, $nim, $book, $date_pinjam, $date_kemba
         <td class='px-6 py-4'>
             <span class='{$colors['bg']} {$colors['text']} text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tight'>$status</span>
         </td>
-        <td class='px-6 py-4'>
-            <button class='p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-indigo-600 transition'>
-                <i class='ph-bold ph-dots-three-outline'></i>
-            </button>
+        <td class='px-6 py-4 text-right'>
+           $actionButton
         </td>
     </tr>";
 }

@@ -93,3 +93,40 @@ function defaultTanggalKembali($hari = 7)
 {
     return date('Y-m-d', strtotime("+$hari days"));
 }
+
+if (isset($_GET['action']) && $_GET['action'] === 'kembalikan') {
+    $idTransaksi = (int) ($_GET['id'] ?? 0);
+    $redirect    = $_GET['redirect'] ?? '../views/transaksi/index.php';
+
+    if ($idTransaksi > 0) {
+        $conn->begin_transaction();
+        try {
+            $stmt = $conn->prepare("SELECT id_buku FROM transaksi WHERE id_transaksi = ? AND status_pinjam = 'dipinjam'");
+            $stmt->bind_param("i", $idTransaksi);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            if ($row = $result->fetch_assoc()) {
+                $idBuku = $row['id_buku'];
+
+                $updateTrx = $conn->prepare("UPDATE transaksi SET status_pinjam = 'kembali' WHERE id_transaksi = ?");
+                $updateTrx->bind_param("i", $idTransaksi);
+                $updateTrx->execute();
+
+                $updateStok = $conn->prepare("UPDATE buku SET stok = stok + 1 WHERE id_buku = ?");
+                $updateStok->bind_param("i", $idBuku);
+                $updateStok->execute();
+
+                $conn->commit();
+                header("Location: $redirect?status=kembali_berhasil");
+            } else {
+                throw new Exception("Transaksi tidak valid atau sudah dikembalikan.");
+            }
+
+        } catch (Exception $e) {
+            $conn->rollback();
+            header("Location: $redirect?status=error&msg=" . urlencode($e->getMessage()));
+        }
+    }
+    exit;
+}

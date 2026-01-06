@@ -31,6 +31,24 @@
         });
     }
 
+    function confirmReturn(id, nama) {
+        Swal.fire({
+            ...oneLibPopup,
+            title: 'Kembalikan Buku?',
+            text: `Pastikan buku yang dipinjam ${nama} telah diterima kembali.`,
+            icon: 'question',
+            iconColor: '#4F46E5',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Kembalikan!',
+            cancelButtonText: 'Batal',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect ke module untuk proses
+                window.location.href = `../../modules/transaksi.php?action=kembalikan&id=${id}&redirect=${window.location.pathname}`;
+            }
+        });
+    }
+
     function confirmDeleteAnggota(id, nama) {
         Swal.fire({
             ...oneLibPopup,
