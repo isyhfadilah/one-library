@@ -134,9 +134,11 @@ document.getElementById('search_anggota').addEventListener('change', function ()
 
             document.getElementById('id_anggota').value = a.id_anggota;
 
+            const fotoPath = a.foto ? `../../assets/img/anggota/${a.foto}` : 'https://ui-avatars.com/api/?name=' + a.nama;
+
             preview.innerHTML = `
                 <div class="flex gap-3 mt-3 p-3 bg-slate-50 rounded-xl">
-                    <img src="${a.foto}" class="w-12 h-12 rounded-full">
+                    <img src="${fotoPath}" class="w-12 h-12 rounded-full object-cover border border-slate-200">
                     <div>
                         <p class="font-bold">${a.nama}</p>
                         <p class="text-xs text-slate-500">${a.nim_nip} • ${a.prodi}</p>
@@ -164,9 +166,11 @@ document.getElementById('search_buku').addEventListener('change', function () {
 
             document.getElementById('id_buku').value = b.id_buku;
 
+            const coverPath = b.cover_url ? `../../assets/img/covers/${b.cover_url}` : '../../assets/img/no-cover.png';
+
             preview.innerHTML = `
                 <div class="flex gap-3 mt-3 p-3 bg-slate-50 rounded-xl">
-                    <img src="${b.cover_url}" class="w-16 rounded">
+                    <img src="${coverPath}" class="w-16 rounded object-cover border border-slate-200" onerror="this.src='https://via.placeholder.com/100x150?text=No+Cover'">
                     <div>
                         <p class="font-bold">${b.judul}</p>
                         <p class="text-xs">${b.penulis}</p>
