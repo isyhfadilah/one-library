@@ -29,8 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php
         $header_title = "Input Peminjaman Baru";
         $header_subtitle = "Pastikan data mahasiswa dan buku sudah benar.";
-        $header_button_label = "Kembali";
-        $header_button_link = "index.php";
         include '../../components/header.php';
         ?>
 
