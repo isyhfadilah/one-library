@@ -37,15 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <section class="p-8 max-w-5xl mx-auto">
             <form method="POST" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                <!-- HIDDEN ID -->
                 <input type="hidden" name="id_anggota" id="id_anggota">
                 <input type="hidden" name="id_buku" id="id_buku">
 
-                <!-- KIRI -->
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-8">
-
-                        <!-- Cari Anggota -->
                         <div>
                             <label class="text-xs font-bold text-slate-400">Cari Anggota (NIM)</label>
                             <input id="search_anggota" placeholder="Masukkan NIM"
@@ -56,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
 
-                        <!-- Cari Buku -->
                         <div>
                             <label class="text-xs font-bold text-slate-400">Cari Buku (ISBN)</label>
                             <input id="search_buku" placeholder="Masukkan ISBN"
@@ -70,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
 
-                <!-- KANAN -->
                 <div class="space-y-6">
                     <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-6">
 
@@ -106,15 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>alert("<?= $result['message'] ?>");</script>
 <?php endif; ?>
 
-<!-- =========================
-     JAVASCRIPT AJAX
-========================= -->
+
 <script>
 const submitBtn = document.getElementById('submitBtn');
 
-/* =========================
-   Lookup Anggota (by NIM)
-========================= */
 document.getElementById('search_anggota').addEventListener('change', function () {
     fetch(`../../modules/transaksi.php?action=getAnggota&nim=${this.value}`)
         .then(res => res.json())
@@ -144,10 +133,6 @@ document.getElementById('search_anggota').addEventListener('change', function ()
         });
 });
 
-
-/* =========================
-   Lookup Buku (by ISBN)
-========================= */
 document.getElementById('search_buku').addEventListener('change', function () {
     fetch(`../../modules/transaksi.php?action=getBuku&isbn=${this.value}`)
         .then(res => res.json())
