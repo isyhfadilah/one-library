@@ -2,16 +2,13 @@
 include '../../config/db.php';
 include '../../modules/buku.php';
 
-// Ambil ID dari URL
 $id = $_GET['id'] ?? null;
 
-// Ambil data buku yang akan diedit
 if ($id) {
     $query = "SELECT * FROM buku WHERE id_buku = '$id'";
     $result = mysqli_query($conn, $query);
     $data = mysqli_fetch_assoc($result);
 
-    // Jika data tidak ditemukan, balikkan ke halaman kelola
     if (!$data) {
         header("Location: kelola.php");
         exit;
@@ -21,7 +18,6 @@ if ($id) {
     exit;
 }
 
-// Tentukan path cover
 $cover_path = "../../assets/img/covers/" . $data['cover_url'];
 $cover_img = (!empty($data['cover_url']) && file_exists($cover_path)) ? $cover_path : null;
 ?>
@@ -102,6 +98,18 @@ $cover_img = (!empty($data['cover_url']) && file_exists($cover_path)) ? $cover_p
                                 </div>
 
                                 <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-700">Penerbit</label>
+                                    <input type="text" name="penerbit" value="<?= $data['penerbit'] ?>" required
+                                        class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="text-sm font-bold text-slate-700">Tahun Terbit</label>
+                                    <input type="number" name="tahun_terbit" value="<?= $data['tahun_terbit'] ?>" required
+                                        class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all">
+                                </div>
+
+                                <div class="space-y-2">
                                     <label class="text-sm font-bold text-slate-700">ISBN-13</label>
                                     <input type="text" name="isbn" value="<?= $data['isbn'] ?>" required
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none transition-all font-mono">
@@ -111,7 +119,41 @@ $cover_img = (!empty($data['cover_url']) && file_exists($cover_path)) ? $cover_p
                                     <label class="text-sm font-bold text-slate-700">Kategori</label>
                                     <select name="kategori" class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none bg-white">
                                         <?php
-                                        $categories = ['Teknologi', 'Sains', 'Fiksi', 'Ekonomi', 'Sejarah'];
+                                        $q_cat = mysqli_query($conn, "SELECT DISTINCT kategori FROM buku ORDER BY kategori ASC");
+                                        $db_cats = [];
+                                        while ($row_cat = mysqli_fetch_assoc($q_cat)) {
+                                            if (!empty($row_cat['kategori'])) {
+                                                $db_cats[] = $row_cat['kategori'];
+                                            }
+                                        }
+
+                                        $default_cats = [
+                                            'Teknologi',
+                                            'Sains',
+                                            'Fiksi',
+                                            'Ekonomi',
+                                            'Sejarah',
+                                            'Politik',
+                                            'Hukum',
+                                            'Sosial',
+                                            'Budaya',
+                                            'Sastra',
+                                            'Kesehatan',
+                                            'Komputer',
+                                            'Agama',
+                                            'Psikologi',
+                                            'Bisnis',
+                                            'Umum'
+                                        ];
+
+                                        $categories = array_unique(array_merge($db_cats, $default_cats));
+
+                                        if (!empty($data['kategori']) && !in_array($data['kategori'], $categories)) {
+                                            $categories[] = $data['kategori'];
+                                        }
+
+                                        sort($categories);
+
                                         foreach ($categories as $cat): ?>
                                             <option value="<?= $cat ?>" <?= ($data['kategori'] == $cat) ? 'selected' : '' ?>><?= $cat ?></option>
                                         <?php endforeach; ?>

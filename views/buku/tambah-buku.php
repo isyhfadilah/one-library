@@ -98,11 +98,41 @@ include '../../modules/buku.php';
                                     <select
                                         name="kategori"
                                         class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 outline-none bg-white">
-                                        <option>Pilih Kategori</option>
-                                        <option>Teknologi</option>
-                                        <option>Sains</option>
-                                        <option>Fiksi</option>
-                                        <option>Ekonomi</option>
+                                        <option value="">Pilih Kategori</option>
+                                        <?php
+                                        $q_cat = mysqli_query($conn, "SELECT DISTINCT kategori FROM buku ORDER BY kategori ASC");
+                                        $db_cats = [];
+                                        while ($row_cat = mysqli_fetch_assoc($q_cat)) {
+                                            if (!empty($row_cat['kategori'])) {
+                                                $db_cats[] = $row_cat['kategori'];
+                                            }
+                                        }
+
+                                        $default_cats = [
+                                            'Teknologi',
+                                            'Sains',
+                                            'Fiksi',
+                                            'Ekonomi',
+                                            'Sejarah',
+                                            'Politik',
+                                            'Hukum',
+                                            'Sosial',
+                                            'Budaya',
+                                            'Sastra',
+                                            'Kesehatan',
+                                            'Komputer',
+                                            'Agama',
+                                            'Psikologi',
+                                            'Bisnis',
+                                            'Umum'
+                                        ];
+
+                                        $categories = array_unique(array_merge($db_cats, $default_cats));
+                                        sort($categories);
+
+                                        foreach ($categories as $cat): ?>
+                                            <option value="<?= $cat ?>"><?= $cat ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
 
