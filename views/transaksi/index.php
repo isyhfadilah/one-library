@@ -43,6 +43,17 @@ include '../../config/db.php';
                         </thead>
                         <tbody class="divide-y divide-slate-50">
                             <?php
+                            $statusFilter = $_GET['status'] ?? 'semua';
+                            $whereClause  = "";
+
+                            if ($statusFilter === 'dipinjam') {
+                                $whereClause = "WHERE t.status_pinjam = 'dipinjam'";
+                            } elseif ($statusFilter === 'kembali') {
+                                $whereClause = "WHERE t.status_pinjam = 'kembali'";
+                            } elseif ($statusFilter === 'terlambat') {
+                                $whereClause = "WHERE t.status_pinjam = 'dipinjam' AND CURDATE() > t.tgl_kembali";
+                            }
+
                             $query = "
                                 SELECT 
                                     t.id_transaksi,
@@ -55,6 +66,7 @@ include '../../config/db.php';
                                 FROM transaksi t
                                 JOIN anggota a ON t.id_anggota = a.id_anggota
                                 JOIN buku b ON t.id_buku = b.id_buku
+                                $whereClause
                                 ORDER BY t.id_transaksi DESC
                             ";
 
@@ -62,6 +74,9 @@ include '../../config/db.php';
 
                             if ($result && $result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
+                                    
+                                    $isTerlambat = ($row['status_pinjam'] === 'dipinjam' && date('Y-m-d') > $row['tgl_kembali']);
+                                    $displayStatus = $isTerlambat ? 'Terlambat' : ucfirst($row['status_pinjam']);
 
                                     renderTransactionRow(
                                         '#TRX-' . str_pad($row['id_transaksi'], 4, '0', STR_PAD_LEFT),
@@ -70,7 +85,7 @@ include '../../config/db.php';
                                         $row['judul'],
                                         date('d M Y', strtotime($row['tgl_pinjam'])),
                                         date('d M Y', strtotime($row['tgl_kembali'])),
-                                        ucfirst($row['status_pinjam'])
+                                        $displayStatus
                                     );
                                 }
                             } else {
