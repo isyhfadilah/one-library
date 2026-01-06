@@ -104,6 +104,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>
 const submitBtn = document.getElementById('submitBtn');
 
+function triggerEvent(el, type) {
+    if ('createEvent' in document) {
+        var e = document.createEvent('HTMLEvents');
+        e.initEvent(type, false, true);
+        el.dispatchEvent(e);
+    } else {
+        var e = document.createEventObject();
+        e.eventType = type;
+        el.fireEvent('on' + e.eventType, e);
+    }
+}
+
 document.getElementById('search_anggota').addEventListener('change', function () {
     fetch(`../../modules/transaksi.php?action=getAnggota&nim=${this.value}`)
         .then(res => res.json())
@@ -167,6 +179,17 @@ document.getElementById('search_buku').addEventListener('change', function () {
 
             submitBtn.disabled = b.stok == 0;
         });
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isbnParam = urlParams.get('isbn');
+
+    if (isbnParam) {
+        const bukuInput = document.getElementById('search_buku');
+        bukuInput.value = isbnParam;
+        bukuInput.dispatchEvent(new Event('change'));
+    }
 });
 </script>
 

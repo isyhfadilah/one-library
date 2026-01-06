@@ -44,10 +44,21 @@ function renderBookCard($id, $title, $author, $isbn, $status, $cover)
             <p class='text-xs text-slate-400 font-mono italic'>ISBN: $isbn</p>
         </div>
 
-        <button $disabled class='relative z-20 mt-4 $buttonClass px-4 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95'>
+    "; // Close previous echo
+        
+    if ($isAvailable) {
+        echo "
+        <a href='../transaksi/transaksi-form.php?isbn=$isbn' class='relative z-20 mt-4 $buttonClass px-4 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95 text-center'>
             $buttonText
-        </button>
-    </div>";
+        </a>";
+    } else {
+        echo "
+        <button disabled class='relative z-20 mt-4 $buttonClass px-4 py-2.5 rounded-xl font-bold text-sm transition-all active:scale-95'>
+            $buttonText
+        </button>";
+    }
+    
+    echo "</div>"; // Close the main div
 }
 
 function renderTransactionRow($id, $name, $nim, $book, $date_pinjam, $date_kembali, $status)
