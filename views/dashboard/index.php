@@ -40,7 +40,7 @@ cekLogin();
           aria-labelledby="peminjaman-terbaru-title">
           <div class="p-6 border-b border-slate-50 flex justify-between items-center">
             <h3 class="font-bold text-slate-800" id="peminjaman-terbaru-title">Peminjaman Terbaru</h3>
-            <a href="#" class="text-sm font-semibold text-indigo-600 hover:underline">Lihat Semua</a>
+            <a href="../transaksi/index.php" class="text-sm font-semibold text-indigo-600 hover:underline">Lihat Semua</a>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-left" aria-describedby="peminjaman-terbaru-title">
