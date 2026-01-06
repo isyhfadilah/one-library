@@ -35,7 +35,7 @@ $cover_img = (!empty($buku['cover_url']) && file_exists($cover_path)) ? $cover_p
 
             if ($buku['stok'] > 0) {
                 $header_button_label = "Pinjam Buku";
-                $header_button_link = "pinjam.php?id=" . $buku['id_buku'];
+                $header_button_link = "../transaksi/transaksi-form.php?isbn=" . $buku['isbn'];
             } else {
                 $header_button_label = "Stok Habis";
                 $header_button_link = "#";
