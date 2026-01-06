@@ -1,5 +1,4 @@
 <?php
-// DO NOT include modules here
 include '../../config/db.php';
 ?>
 <!DOCTYPE html>
@@ -8,7 +7,6 @@ include '../../config/db.php';
 <head>
     <title>Tambah Anggota Baru | OneLib</title>
 
-    <!-- IMPORTANT: meta.php MUST use absolute asset paths -->
     <?php include '../../components/meta.php'; ?>
 </head>
 
@@ -31,7 +29,6 @@ include '../../config/db.php';
                 enctype="multipart/form-data"
                 class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                <!-- FOTO -->
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
                         <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4 block">
@@ -59,7 +56,6 @@ include '../../config/db.php';
                     </div>
                 </div>
 
-                <!-- FORM DATA -->
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
                         <h3 class="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-6 flex items-center gap-2">
@@ -68,7 +64,7 @@ include '../../config/db.php';
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                            <div class="md:col-span-2">
+                            <div class="md:col-span-2 space-y-2">
                                 <label class="text-sm font-bold text-slate-700">Nama Lengkap</label>
                                 <input
                                     type="text"
@@ -77,7 +73,7 @@ include '../../config/db.php';
                                     class="w-full px-4 py-3.5 rounded-2xl border border-slate-200">
                             </div>
 
-                            <div>
+                            <div class="space-y-2">
                                 <label class="text-sm font-bold text-slate-700">NIM</label>
                                 <input
                                     type="text"
@@ -86,7 +82,7 @@ include '../../config/db.php';
                                     class="w-full px-4 py-3.5 rounded-2xl border border-slate-200 font-mono">
                             </div>
 
-                            <div>
+                            <div class="space-y-2">
                                 <label class="text-sm font-bold text-slate-700">Program Studi</label>
                                 <input
                                     type="text"
@@ -95,7 +91,7 @@ include '../../config/db.php';
                                     class="w-full px-4 py-3.5 rounded-2xl border border-slate-200">
                             </div>
 
-                            <div>
+                            <div class="space-y-2">
                                 <label class="text-sm font-bold text-slate-700">Status</label>
                                 <select
                                     name="status"

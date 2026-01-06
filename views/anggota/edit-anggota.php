@@ -1,5 +1,4 @@
 <?php
-// DO NOT include modules here
 include '../../config/db.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -41,10 +40,8 @@ $fotoPath = "/one-library/assets/img/anggota/" . $anggota['foto'];
                 enctype="multipart/form-data"
                 class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-                <!-- ID -->
                 <input type="hidden" name="id_anggota" value="<?= $anggota['id_anggota'] ?>">
 
-                <!-- FOTO -->
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
                         <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-4 block">
@@ -75,7 +72,6 @@ $fotoPath = "/one-library/assets/img/anggota/" . $anggota['foto'];
                     </div>
                 </div>
 
-                <!-- FORM DATA -->
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
                         <h3 class="text-sm font-bold text-indigo-600 uppercase tracking-widest mb-6 flex items-center gap-2">
