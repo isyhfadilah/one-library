@@ -1,5 +1,23 @@
 <?php
 include '../../config/functions.php';
+include '../../config/db.php';
+
+$keyword = isset($_GET['search'])
+    ? mysqli_real_escape_string($conn, $_GET['search'])
+    : '';
+
+$query = "SELECT * FROM anggota";
+
+if ($keyword !== '') {
+    $query .= " WHERE 
+        nama LIKE '%$keyword%' OR 
+        nim_nip LIKE '%$keyword%' OR 
+        prodi LIKE '%$keyword%'";
+}
+
+$query .= " ORDER BY id_anggota DESC";
+
+$result_anggota = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -62,10 +80,26 @@ include '../../config/functions.php';
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-50">
-                                <?php
-                                renderMemberRow("Aditya Saputra", "240192831", "Teknik Informatika", "aditya.s@binus.ac.id", "Aktif");
-                                renderMemberRow("Budi Kusuma", "240192110", "Desain Komunikasi Visual", "budi.k@binus.ac.id", "Suspended");
-                                ?>
+                                <?php if ($result_anggota && mysqli_num_rows($result_anggota) > 0): ?>
+                                    <?php while ($row = mysqli_fetch_assoc($result_anggota)): ?>
+                                        <?php
+                                        renderMemberRow(
+                                            $row['id_anggota'],
+                                            $row['nama'],
+                                            $row['nim_nip'],
+                                            $row['prodi'],
+                                            $row['email'] ?? '-',
+                                            ucfirst($row['status'])
+                                        );
+                                        ?>
+                                    <?php endwhile; ?>
+                                <?php else: ?>
+                                    <tr>
+                                        <td colspan="6" class="px-6 py-6 text-center text-slate-400">
+                                            Tidak ada data anggota
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

@@ -31,6 +31,23 @@
         });
     }
 
+    function confirmDeleteAnggota(id, nama) {
+        Swal.fire({
+            ...oneLibPopup,
+            title: 'Hapus Anggota?',
+            text: `Data anggota "${nama}" akan dihapus permanen.`,
+            icon: 'warning',
+            iconColor: '#F43F5E',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "../../modules/anggota.php?hapus_id=" + id;
+            }
+        });
+    }
+
     function confirmLogout(url) {
         Swal.fire({
             ...oneLibPopup,

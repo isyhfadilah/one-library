@@ -52,6 +52,7 @@ function renderBookCard($id, $title, $author, $isbn, $status, $cover)
 
 function renderTransactionRow($id, $name, $nim, $book, $date_pinjam, $date_kembali, $status)
 {
+    $status = ucfirst(strtolower($status));
     $statusMap = [
         'Dipinjam' => ['bg' => 'bg-amber-100', 'text' => 'text-amber-700'],
         'Kembali'  => ['bg' => 'bg-emerald-100', 'text' => 'text-emerald-700'],
@@ -86,32 +87,53 @@ function renderTransactionRow($id, $name, $nim, $book, $date_pinjam, $date_kemba
         </td>
     </tr>";
 }
-
-function renderMemberRow($name, $nim, $prodi, $email, $status)
+function formatTanggal($date)
 {
-    $statusClass = (strtolower($status) == 'aktif')
+    return date('d M Y', strtotime($date));
+}
+
+function renderMemberRow($id, $name, $nim, $prodi, $email, $status)
+{
+    $isAktif = strtolower($status) === 'aktif';
+
+    $statusClass = $isAktif
         ? 'bg-emerald-100 text-emerald-700'
         : 'bg-rose-100 text-rose-700';
+
+    $nextStatus = $isAktif ? 'nonaktif' : 'aktif';
 
     $avatarUrl = "https://ui-avatars.com/api/?name=" . urlencode($name) . "&background=random";
 
     echo "
     <tr class='hover:bg-slate-50/30 transition'>
         <td class='px-6 py-4 flex items-center gap-3'>
-            <img src='$avatarUrl' class='w-9 h-9 rounded-full shadow-sm'>
-            <span class='font-semibold text-sm'>$name</span>
+            <img src='{$avatarUrl}' class='w-9 h-9 rounded-full shadow-sm'>
+            <span class='font-semibold text-sm'>{$name}</span>
         </td>
-        <td class='px-6 py-4 text-sm text-slate-600 font-medium'>$nim</td>
-        <td class='px-6 py-4 text-sm text-slate-500'>$prodi</td>
-        <td class='px-6 py-4 text-sm text-slate-500'>$email</td>
+
+        <td class='px-6 py-4 text-sm text-slate-600 font-medium'>{$nim}</td>
+
+        <td class='px-6 py-4 text-sm text-slate-500'>{$prodi}</td>
+
+        <td class='px-6 py-4 text-sm text-slate-500'>{$email}</td>
+
         <td class='px-6 py-4'>
-            <span class='$statusClass text-[10px] font-bold px-3 py-1 rounded-full uppercase'>$status</span>
+            <span class='{$statusClass} text-[10px] font-bold px-3 py-1 rounded-full uppercase'>
+                {$status}
+            </span>
         </td>
+
         <td class='px-6 py-4 text-right'>
-            <button class='text-slate-400 hover:text-indigo-600 p-2 rounded-lg transition'>
+            <!-- EDIT ANGGOTA -->
+                <a href='edit-anggota.php?id={$id}'
+                class='text-slate-400 hover:text-indigo-600 p-2 rounded-lg transition'>
                 <i class='ph-bold ph-pencil-simple text-lg'></i>
-            </button>
-            <button class='text-slate-400 hover:text-rose-600 p-2 rounded-lg transition ml-1'>
+                </a>
+
+            <!-- DELETE -->
+            <button
+                onclick=\"confirmDeleteAnggota({$id}, '{$name}')\"
+                class='text-slate-400 hover:text-rose-600 p-2 rounded-lg transition ml-1'>
                 <i class='ph-bold ph-trash text-lg'></i>
             </button>
         </td>
