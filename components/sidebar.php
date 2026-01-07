@@ -40,7 +40,7 @@ $auth_url = "/one-library/authentication";
 
     <a href="<?= $base_url ?>/anggota/index.php"
       class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold group transition-all 
-      <?= ($current_dir == 'mahasiswa') ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' ?>">
+      <?= ($current_dir == 'anggota') ? 'bg-indigo-50 text-indigo-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900' ?>">
       <i class="ph-bold ph-users text-xl"></i>
       <span>Anggota</span>
     </a>
